@@ -1,0 +1,32 @@
+{
+  "name": "api_rest_trianafy",
+  "version": "1.0.0",
+  "description": "Proyecto api rest cayetano",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --exec babel-node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caye2000/API_rest_Trianafy.git"
+  },
+  "author": "Cayetano García",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/caye2000/API_rest_Trianafy/issues"
+  },
+  "homepage": "https://github.com/caye2000/API_rest_Trianafy#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/node": "^7.12.10",
+    "@babel/preset-env": "^7.12.11"
+  }
+}
