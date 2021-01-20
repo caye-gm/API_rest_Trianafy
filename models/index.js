@@ -1,8 +1,8 @@
 import * as user from './user';
-import * as song from './song'
-import * as playlist from './playlist'
+import * as songs from './songs'
+import * as lists from './lists'
 export default {
     user,
-    song,
-    playlist,
+    songs,
+    lists,
 }

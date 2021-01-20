@@ -1,8 +1,9 @@
-import { user } from '../models/user';
+import {user,userRepository} from '../models/user';
 
 
 const userController = {
 
+    
 
 };
 

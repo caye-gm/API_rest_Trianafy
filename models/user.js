@@ -1,14 +1,27 @@
-class user {
+import mongoose from 'mongoose';
+const { Schema } = mongoose;
 
-    constructor(id, name , username,email ,password) {
-        this.id = id;
-        this.name=name
-        this.username = username;
-        this.email=email;
-        this.password=password;
-    }
+const userSchema = new Schema({
+    name: String,
+    username: String,
+    email: String,
+    password:String
+});
+
+const user = mongoose.model('user', userSchema);
+    
+
+
+
+const userRepository = {
+
+    
+
 
 }
+
+
 export  {
-    user
+    user,
+    userRepository,
 }
