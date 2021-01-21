@@ -53,7 +53,7 @@ app.use((req, res, next) => {
 // Configuración de las rutas.
 app.use('/songs', routes.songs);
 app.use('/lists', routes.lists);
-
+app.use('/auth',routes.auth);
 
 // Inicialización del servidor y conexión a base de datos
 
