@@ -28,14 +28,17 @@ const userRepository = {
         return result != null ? result : undefined;
     },
 
-    async create(user) {
+    async create(name,username,email,password) {
         
-        name=newUser.name
-        username=newUser.username
-        email=newUser.email
-        pass = bcrypt.hashSync(newUser.password, parseInt(process.env.BCRYPT_ROUNDS));
-
-        return await user.create( {name, username , email ,pass }).exec();;
+        
+        const theUser= new user({
+         name : name,
+         username : username,
+         email : email,
+         pass : password
+        })
+        
+        return await theUser.save();
     },
 
 
