@@ -7,16 +7,20 @@ const userSchema = new Schema({
     username: String,
     email: String,
     password:String
-});
+},{versionKey:false});
 
 const user = mongoose.model('users', userSchema);
     
+
+
+
 const usernameExists = (username) => {
     let result = userRepository.findByUsername(username)
     return result == null ? result : undefined;
 }
 
 const userRepository = {
+
 
     async findById(id) {
         const result = await user.findById(id).exec();
@@ -25,7 +29,7 @@ const userRepository = {
 
     async findByUsername(username) {
         const result = await user.find( {username : username}).exec();
-        return result != null ? result : undefined;
+        return result != null ? result[0] : undefined;
     },
 
     async create(name,username,email,password) {
@@ -35,14 +39,23 @@ const userRepository = {
          name : name,
          username : username,
          email : email,
-         pass : password
+         password : password
         })
         
         return await theUser.save();
     },
 
+    toDto(user) { 
+        return {
+            id: user.id,
+            name: user.name, 
+            username: user.username,
+            email: user.email
+        }
+    },
 
 }
+
 
 
 export  {

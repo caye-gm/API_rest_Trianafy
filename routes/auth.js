@@ -24,11 +24,11 @@ router.post('/register', [
 validar, 
 AuthController.register);
 
-/*
+
 router.post('/login',
     password(),
     AuthController.login
     );
-*/
+
 
 export default router;
