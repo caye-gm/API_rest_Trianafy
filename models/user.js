@@ -34,7 +34,7 @@ const userRepository = {
 
     async create(name,username,email,password) {
         
-        
+        try {
         const theUser= new user({
          name : name,
          username : username,
@@ -43,6 +43,10 @@ const userRepository = {
         })
         
         return await theUser.save();
+    
+        } catch (error) {
+            res.status(400).json({Error: error.message});
+        }
     },
 
     toDto(user) { 

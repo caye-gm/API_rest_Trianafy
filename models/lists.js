@@ -1,19 +1,33 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
+
 const listsSchema = new Schema({
-    name: String,
+    name: {
+      type: String,
+      required: [true, 'El nombre es necesario'],
+      minlength: [1, 'La cantidad mínima de caracteres es 1']
+      },
     description: String,
-    user_id: String,
-    songs:String
-});
+    user: {
+      type: mongoose.ObjectId,
+      ref: 'users'
+    },
+    songs: [{
+      type: mongoose.ObjectId,
+      ref: 'songs'
+    }]
+  });
+
+
+
 
 const lists = mongoose.model('lists', listsSchema);
 
 const listsRepository = {
 
     async findAll() {
-        const result =  await lists.find({}).exec();
+        const result =  await lists.find({}).populate('user').exec();
         return result;
     },
     async findById(id) {

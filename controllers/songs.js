@@ -12,14 +12,26 @@ const songController = {
     },
     allSongsID: async (req, res) => {
 
-        let user = await songsRepository.findById(req.params.id);
-        if (user != undefined) {
-            res.json(user);
+        let songs = await songsRepository.findById(req.params.id);
+        if (songs != undefined) {
+            res.json(songs);
         } else {
             res.sendStatus(404);
         }
 
     },
+    nuevoSong: async (req, res) => {
+        
+        let songs = await songsRepository.create({
+            
+            title: req.body.title,
+            artist: req.body.artist,
+            album:req.body.album,
+            year:req.body.year,
+            
+        })
+        res.status(201).json(songs);
+    }
 
 
 
