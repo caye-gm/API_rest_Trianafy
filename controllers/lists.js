@@ -20,6 +20,22 @@ const listsController = {
         }
 
     },
+    newList: async (req, res) => {
+
+        let lists = await listsRepository.create({
+            
+            name: req.body.name,
+            description: req.body.description,
+            user:req.user.id,
+            songs:req.body.songs,
+            
+        })
+        res.status(201).json(lists);
+    },
+    eliminarListaReproduccion: async (req, res) => {
+        let resul = await listsRepository.deleteList(req.params.id, req.user.id);
+        resul.deletedCount>0 ? res.sendStatus(204) : res.sendStatus(404)
+    },
 
 
 

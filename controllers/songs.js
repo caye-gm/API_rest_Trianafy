@@ -20,7 +20,7 @@ const songController = {
         }
 
     },
-    nuevoSong: async (req, res) => {
+    newSong: async (req, res) => {
         
         let songs = await songsRepository.create({
             

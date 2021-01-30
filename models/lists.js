@@ -33,7 +33,27 @@ const listsRepository = {
     async findById(id) {
         const result = await lists.findById(id).exec();
         return result != null ? result : undefined;
-     }
+     },
+    async create(nuevaList) {
+      const list = new lists({
+          name: nuevaList.name,
+          description: nuevaList.description,
+          user: nuevaList.user,
+          songs: nuevaList.songs
+      });
+      const result = await list.save();
+      return result;
+  },
+  async deleteList(id, idUser) {
+    if (mongoose.Types.ObjectId.isValid(id)) {
+      return await lists.deleteOne({
+        _id: id,
+        user_id: idUser,
+      }).exec();
+    } else {
+      return null;
+    }
+  },
 
 }
 
