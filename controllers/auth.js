@@ -27,8 +27,8 @@ const AuthController = {
         // Aquí tan solo tenemos que preocuparnos de generar y devolver el token
         const token = JwtService.sign(req.user);
         res.status(201).json({
-            username: req.user.username,
-            email: req.user.email,
+            user: req.user,
+          
             token: token
         });
     }

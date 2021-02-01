@@ -1,5 +1,5 @@
 import { lists,listsRepository } from '../models/lists';
-
+import mongoose from 'mongoose';
 
 const listsController = {
 
@@ -21,22 +21,45 @@ const listsController = {
 
     },
     newList: async (req, res) => {
-
-        let lists = await listsRepository.create({
-            
-            name: req.body.name,
-            description: req.body.description,
-            user:req.user.id,
-            songs:req.body.songs,
-            
-        })
-        res.status(201).json(lists);
+        try{
+            let listaNueva = await listsRepository.create({
+                name: req.body.name,
+                description: req.body.description,
+                user_id: req.user.id
+            });
+            res.status(201).json(listaNueva);
+        }catch(error){
+            res.status(400).json({Error:`Se ha producido un error con su peticion :${error.message}`})
+        }   
     },
     eliminarList: async (req, res) => {
         let resul = await listsRepository.deleteList(req.params.id, req.user.id);
         resul.deletedCount>0 ? res.sendStatus(204) : res.sendStatus(404)
     },
 
+    editarList:async(req,res)=>{
+        if(req.params.id!=undefined && mongoose.Types.ObjectId.isValid(req.params.id)){
+            let list=await listsRepository.editList(req.params.id,{
+                name:req.body.name,
+                description:req.body.description,
+                user_id:req.body.user_id,
+                songs:req.body.songs
+            });
+            if(list==undefined){
+                res.sendStatus(404);
+            }else{
+                res.sendStatus(204);
+            }
+        }else{
+            res.sendStatus(409);
+        }
+    },
+    //
+    songOfList: async (req, res) => {
+        console.log(req.user.id);
+        let songs = await listsRepository.songOfList(req.params.id, req.user.id);
+        songs != null ? res.json(songs) : res.status(404).json({Error:"No se ha encontrado la lista de reproducción solicitada"});
+    },
 
 
 

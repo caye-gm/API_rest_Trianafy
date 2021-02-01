@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 const songController = {
 
     allSongs: async (req, res) => {
+        console.log(req.user.id);
         const data = await songsRepository.findAll();
         if (Array.isArray(data) && data.length > 0) 
             res.json(data);

@@ -9,4 +9,5 @@ router.get('/',token(), listsController.allLists)
 router.get('/:id',token(), listsController.allListsID)
 router.post('/',token(), listsController.newList)
 router.delete('/:id',token(), listsController.eliminarList)
+router.get('/:idList/songs/:idSong',token(),listsController.songOfList);
 export default router;

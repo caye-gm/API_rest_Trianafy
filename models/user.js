@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { password } from '../services/passport';
+
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
