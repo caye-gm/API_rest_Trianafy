@@ -32,7 +32,7 @@ const listsController = {
         })
         res.status(201).json(lists);
     },
-    eliminarListaReproduccion: async (req, res) => {
+    eliminarList: async (req, res) => {
         let resul = await listsRepository.deleteList(req.params.id, req.user.id);
         resul.deletedCount>0 ? res.sendStatus(204) : res.sendStatus(404)
     },

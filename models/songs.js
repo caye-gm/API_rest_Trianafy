@@ -33,6 +33,16 @@ const songsRepository = {
         const result = await song.save();
         return result;
     },
+    async deleteSong(id, idUser) {
+        if (mongoose.Types.ObjectId.isValid(id)) {
+          return await songs.deleteOne({
+            _id: id,
+            user_id: idUser,
+          }).exec();
+        } else {
+          return null;
+        }
+      },
     
 
 }

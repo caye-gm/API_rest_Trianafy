@@ -5,8 +5,6 @@ const { Schema } = mongoose;
 const listsSchema = new Schema({
     name: {
       type: String,
-      required: [true, 'El nombre es necesario'],
-      minlength: [1, 'La cantidad mínima de caracteres es 1']
       },
     description: String,
     user: {
@@ -17,7 +15,7 @@ const listsSchema = new Schema({
       type: mongoose.ObjectId,
       ref: 'songs'
     }]
-  });
+  },{versionKey:false});
 
 
 

@@ -31,7 +31,11 @@ const songController = {
             
         })
         res.status(201).json(songs);
-    }
+    },
+    eliminarSong: async (req, res) => {
+        let resul = await songsRepository.deleteSong(req.params.id, req.user.id);
+        resul.deletedCount>0 ? res.sendStatus(204) : res.sendStatus(404)
+    },
 
 
 
