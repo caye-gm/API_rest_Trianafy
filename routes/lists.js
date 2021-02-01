@@ -13,4 +13,6 @@ router.delete('/:id',token(), listsController.eliminarList)
 router.get('/:idList/songs/:idSong',token(),listsController.songOfList);
 router.get('/:idList/songs/',token(),listsController.songsOfList);
 router.delete('/:idList/songs/:idSong',token(),listsController.deleteSongOfList);
+router.put('/:id',token(),listsController.updateList);
+
 export default router;

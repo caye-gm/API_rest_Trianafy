@@ -54,7 +54,22 @@ const listsController = {
             res.sendStatus(409);
         }
     },
-    //
+    updateList: async (req, res) => {
+        if (req.params.id != undefined && mongoose.Types.ObjectId.isValid(req.params.id)) {
+            let newList = await listsRepository.updateList(req.params.id, {
+                name: req.body.name,
+                description: req.body.description
+            }, req.user.id);
+            if (newList == undefined) {
+                res.sendStatus(404);
+            } else {
+                res.sendStatus(204);
+            }
+        } else {
+            res.sendStatus(400);
+        }
+    },
+
     songOfList: async (req, res) => {
         console.log(req.user.id);
         let songs = await listsRepository.songOfList(req.params.idList, req.params.idSong, req.user.id);
@@ -72,7 +87,7 @@ const listsController = {
     addSongOfList: async (req, res) => {
         let add = await listsRepository.addSongOfList(req.params.idList, req.params.idSong, req.user.id);
         add != null ? res.json(add) : res.sendStatus(404);
-    },
+    }
 
 };
 

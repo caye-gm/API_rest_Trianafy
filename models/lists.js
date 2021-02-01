@@ -63,7 +63,19 @@ const listsRepository = {
       return undefined;
     }
   },
-  //////
+  async updateList(id, newList, user_id) {
+    const list = await lists.findOne({
+      _id: id,
+      user_id: user_id,
+    }).exec();
+    if (list != null) {
+
+      return await Object.assign(list,newList).save();
+    } else {
+      return undefined;
+    }
+  },
+  
   async songOfList(idList, idSong, idUser) {
     if (
       mongoose.Types.ObjectId.isValid(idList) &&
