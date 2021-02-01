@@ -1,5 +1,5 @@
 import { songs,songsRepository } from '../models/songs';
-
+import mongoose from 'mongoose';
 
 const songController = {
 
@@ -36,12 +36,24 @@ const songController = {
         let resul = await songsRepository.deleteSong(req.params.id, req.user.id);
         resul.deletedCount>0 ? res.sendStatus(204) : res.sendStatus(404)
     },
-
-
-
-
+    editarSong:async(req,res)=>{
+        if(req.params.id!=undefined && mongoose.Types.ObjectId.isValid(req.params.id)){
+            let song=await songsRepository.editSong(req.params.id,{
+                title:req.body.title,
+                artist:req.body.artist,
+                album:req.body.album,
+                year:req.body.year
+            });
+            if(song==undefined){
+                res.sendStatus(404);
+            }else{
+                res.sendStatus(204);
+            }
+        }else{
+            res.sendStatus(409);
+        }
+    }
 };
-
 export  {
     songController
 }

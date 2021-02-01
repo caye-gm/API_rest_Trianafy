@@ -9,4 +9,5 @@ router.get('/',token(), songController.allSongs)
 router.get('/:id',token(), songController.allSongsID)
 router.post('/',token(), songController.newSong)
 router.delete('/:id',token(), songController.eliminarSong)
+router.put('/:id',token(), songController.editarSong)
 export default router;

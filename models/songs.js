@@ -43,8 +43,19 @@ const songsRepository = {
           return null;
         }
       },
-    
+      async editSong(id, editSong) {
+        if (mongoose.Types.ObjectId.isValid(id)) {
+          const song = await songs.findById(id).exec();
+          if (song != null) {
+            return await Object.assign(song, editSong).save();
+          } else {
+            return undefined;
+          }
+        } else {
+          return undefined;
+        }
 
+}
 }
 export  {
     songs,
