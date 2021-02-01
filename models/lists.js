@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { songs } from './songs';
 const { Schema } = mongoose;
 
 
@@ -29,7 +30,7 @@ const listsRepository = {
         return result;
     },
     async findById(id) {
-        const result = await lists.findById(id).exec();
+        const result = await lists.findById(id).populate('songs').exec();
         return result != null ? result : undefined;
      },
      async create(newList) {
@@ -83,33 +84,72 @@ const listsRepository = {
     }
     return null;
   },
-  /*
-  async eliminarCancionLista(idList, idSong, idUser) {
+  async songsOfList(idList, idUser) {
+    if (
+      mongoose.Types.ObjectId.isValid(idList) 
+    ) {
+      const lista = await lists.findOne({
+        _id: idList,
+        user_id: idUser,
+      }).populate("songs").exec();
+      if (lista != null && lista.songs.length > 0) {
+        return lista.songs;
+      }
+    }
+    return null;
+  },
+  
+  async deleteSongOfList(idList, idSong, idUser) {
     if (
       mongoose.Types.ObjectId.isValid(idList) &&
       mongoose.Types.ObjectId.isValid(idSong)
     ) {
-      let lista = await ListaReproduccion.findOne({
+      let lista = await lists.findOne({
         _id: idList,
         user_id: idUser,
       }).populate("songs").exec();
-      let song = await Cancion.findById(idSong).exec();
+      let song = await songs.findById(idSong).exec();
       if (song != null && song != null) {
-        let indiceBorrar = undefined;
-        //Voy ha hacer una especie de indexOf para obtener el indice de una canción en la lista de canciones de una playlist
-        for (let i = 0; i < lista.canciones.length; i++) {
-          if ((lista.canciones[i]._id = idSong)) {
-            indiceBorrar = i;
+        let index = undefined;
+      
+        for (let i = 0; i < lista.songs.length; i++) {
+          if ((lista.songs[i]._id = idSong)) {
+            index = i;
           }
         }
-        lista.canciones.splice(indiceBorrar, 1);
+        lista.songs.splice(index, 1);
         await lista.save();
         return lista;
       }
     }
     return null;
-  },*/
-  
+  },
+  async addSongOfList(idList, idSong, idUser) {
+    if (
+      mongoose.Types.ObjectId.isValid(idList) && mongoose.Types.ObjectId.isValid(idSong)
+    ) {
+      const lista = await lists.findOne({
+        _id: idList,
+        user_id: idUser,
+      }).populate("songs").exec();
+      console.log(lista);
+      const song = await songs.findById(idSong);
+      if (lista != null && song != null) {
+       let bool=false
+        lista.songs.forEach(v => {
+          if(v==song){
+            bool=true
+          }
+        });
+        if(bool==false){
+          lista.songs.push(song);
+          await lista.save();
+          return lista;
+        }
+      }
+    }
+    return null;
+  }
 
 }
 
