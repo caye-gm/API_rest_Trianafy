@@ -22,5 +22,7 @@ Pasos para ejecutar el proyecto:
 
 -Ejecutamos en consola npm start y el proyecto deberia de ejecutar sin problema 
 
+-Previamente se recomienda si se va a realizar en local usar postman para realizar peticiones (es un programa sencillo)
 
+### **Rutas de la API**
 
