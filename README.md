@@ -28,40 +28,31 @@ Pasos para ejecutar el proyecto:
 
 #### **/auth**
 
-post /login autenticarse
-
-post /register registrarse
+    post /login autenticarse
+    post /register registrarse
 
 #### **/songs**
 
-get: / obtiene todas las canciones
-
-post / agrega una nueva canción
-
-get: /:id obtiene una canción buscada por id 
-
-delete: /:id borra una canción buscada por id 
-
-put: /:id modifica una canción 
+    get: / obtiene todas las canciones
+    post / agrega una nueva canción
+    get: /:id obtiene una canción buscada por id 
+    delete: /:id borra una canción buscada por id 
+    put: /:id modifica una canción 
 
 #### **/lists**
 
-get / obtiene todas las playlist
-
-get /:id obtiene una playlist buscada por id
-
-post / crea una nueva playlist 
-
-put /:id edita una playlist buscada por id
-
-delete /:id elimina una playlist buscada por id
+    get / obtiene todas las playlist
+    get /:id obtiene una playlist buscada por id
+    post / crea una nueva playlist 
+    put /:id edita una playlist buscada por id
+    delete /:id elimina una playlist buscada por id
 
 
 
 #### **/lists/:id/songs**
 
-get /:id busca una canción de la playlist por id
-get / busca las canciones de una playlist
-post /:id agrega una canción a una playlist
-delete /:id elimina una canción de una playlist
+    get /:id busca una canción de la playlist por id
+    get / busca las canciones de una playlist
+    post /:id agrega una canción a una playlist
+    delete /:id elimina una canción de una playlist
 
