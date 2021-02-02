@@ -6,8 +6,13 @@ const { Schema } = mongoose;
 const listsSchema = new Schema({
     name: {
       type: String,
+      required:"Introduce un nombre "
       },
-    description: String,
+    description:{
+      type: String,
+      required:"Introduce una descripción"
+    } ,
+    
     user_id: {
       type: mongoose.ObjectId,
       ref: 'users'
@@ -41,16 +46,16 @@ const listsRepository = {
       });
       return await thelist.save();
     },
-  async deleteList(id, idUser) {
-    if (mongoose.Types.ObjectId.isValid(id)) {
-      return await lists.deleteOne({
-        _id: id,
-        user_id: idUser,
-      }).exec();
-    } else {
-      return null;
-    }
-  },
+    async deleteList(id, user_id) {
+      if (mongoose.Types.ObjectId.isValid(id)) {
+        return await lists.deleteOne({
+          _id: id,
+          user_id: user_id,
+        }).exec();
+      } else {
+        return null;
+      }
+    },
   async editList(id, editList) {
     if (mongoose.Types.ObjectId.isValid(id)) {
       const list = await lists.findById(id).exec();

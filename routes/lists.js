@@ -9,7 +9,7 @@ router.get('/',token(), listsController.allLists)
 router.get('/:id',token(), listsController.allListsID)
 router.post('/',token(), listsController.newList)
 router.post('/:idList/songs/:idSong',token(),listsController.addSongOfList)
-router.delete('/:id',token(), listsController.eliminarList)
+router.delete('/:id',token(),listsController.eliminarList);
 router.get('/:idList/songs/:idSong',token(),listsController.songOfList);
 router.get('/:idList/songs/',token(),listsController.songsOfList);
 router.delete('/:idList/songs/:idSong',token(),listsController.deleteSongOfList);

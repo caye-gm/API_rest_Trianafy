@@ -1,9 +1,17 @@
 import mongoose from 'mongoose';
+import { list, lists } from "./lists";
 const { Schema } = mongoose;
 
 const songsSchema = new Schema({
-    title: String,
-    artist: String,
+    title: {
+      type: String,
+      required:"Introduce un título",
+      
+      },
+    artist: {
+      type: String,
+      required:"Introduce un artista"
+      },
     album: String,
     year: Number
 },{versionKey:false});
@@ -33,16 +41,17 @@ const songsRepository = {
         const result = await song.save();
         return result;
     },
-    async deleteSong(id, idUser) {
-        if (mongoose.Types.ObjectId.isValid(id)) {
-          return await songs.deleteOne({
-            _id: id,
-            user_id: idUser,
+    async deleteSong(id) {
+      
+      if (mongoose.Types.ObjectId.isValid(id)) {
+        return await songs.deleteOne({
+          _id: id,
           }).exec();
-        } else {
-          return null;
-        }
-      },
+      } else {
+        return undefined;
+      }
+    }
+    ,
       async editSong(id, editSong) {
         if (mongoose.Types.ObjectId.isValid(id)) {
           const song = await songs.findById(id).exec();

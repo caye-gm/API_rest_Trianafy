@@ -34,7 +34,8 @@ const songController = {
         res.status(201).json(songs);
     },
     eliminarSong: async (req, res) => {
-        let resul = await songsRepository.deleteSong(req.params.id, req.user.id);
+        
+        let resul = await songsRepository.deleteSong(req.params.id);
         resul.deletedCount>0 ? res.sendStatus(204) : res.sendStatus(404)
     },
     editarSong:async(req,res)=>{

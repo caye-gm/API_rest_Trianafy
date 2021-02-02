@@ -3,9 +3,19 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
-    name: String,
-    username: String,
-    email: String,
+    name: {
+        type:String,
+        required:"Introduce su nombre y apellidos"
+    },
+    username: {
+        
+        type:String,
+        required:"Introduce su nombre de usuario"
+    },
+    email: {
+        type:String,
+        required:"Introduce su nombre y apellidos"
+    },
     password:String
 },{versionKey:false});
 

@@ -7,18 +7,21 @@ import { JwtService } from '../services/jwt';
 
 const AuthController = {
 
-    register: (req, res, next) => {
+    register: async(req, res, next) => {
        
       
-        
-        userRepository.create(req.body.name,req.body.username, req.body.email, bcrypt.hashSync(req.body.password, parseInt(process.env.BCRYPT_ROUNDS)));
-        
-        // Devolvemos todos los datos del usuario menos la contraseña                
+        try {
+            await userRepository.create(req.body.name,req.body.username, req.body.email, bcrypt.hashSync(req.body.password, parseInt(process.env.BCRYPT_ROUNDS)));
+                      
         res.status(201).json({
+            
             name: req.body.name,
             username: req.body.username,
             email: req.body.email
         });
+    } catch (err) {
+        res.status(404).json({message:"error , usuario o email en uso"});
+    }
     },
 
 
