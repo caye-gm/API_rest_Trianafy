@@ -26,3 +26,13 @@ Pasos para ejecutar el proyecto:
 
 ### **Rutas de la API**
 
+## **/songs**
+
+get: / obtiene todas las canciones
+
+get: /:id obtiene una canción en base a su id 
+
+delete: /:id borra una canción en base a su id 
+
+put: /:id modifica una canción -post / agrega una nueva canción
+
